@@ -9,7 +9,8 @@ from .api import AutoListAPI
 class VehicleListView(View):
     def get(self, request):
         '''
-        Call the API and fill in recorded pageviews
+        Call the Autolist API to get a list of vehicles
+        and then fill in recorded pageviews
         '''
         auto_list_api = AutoListAPI()
         vehicles = []
@@ -19,9 +20,7 @@ class VehicleListView(View):
                     vin=vehicle['vin'].lower()
                 ).page_views
             except ObjectDoesNotExist:
-                print('vehicle', vehicle['vin'])
                 pass
-
 
             vehicles.append(vehicle)
 
@@ -29,8 +28,10 @@ class VehicleListView(View):
 
 
 class VehiclePageView(View):
-
     def post(self, request, vin):
+        '''
+        Increment the page views for one vehicle identified by VIN
+        '''
         vehicle, _ = Vehicle.objects.get_or_create(vin=vin.lower())
         vehicle.page_views += 1
         vehicle.save()

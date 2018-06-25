@@ -2,7 +2,7 @@ WILLIAM WIDMER
 Autolist assignment 6/25
 
 Created using:
-React Boilerplate https://github.com/react-boilerplate/react-boilerplate
+React (create-react-app)
 Python3 django
 
 Getting started:
